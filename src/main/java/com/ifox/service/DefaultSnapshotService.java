@@ -39,56 +39,51 @@ public class DefaultSnapshotService implements SnapshotService {
 
     private void initAnimalMap(String id) {
         for (Map.Entry<String, Data> entry : dataMap.entrySet()) {
-            checkTimeFormat(entry);
+            checkTimeFormat(entry.getValue().getTime());
             checkIdFormat(entry.getKey());
-            for (AnimalLocation animalLocation : entry.getValue().getAnimalLocations()) {
-                checkConflict(entry, animalLocation);
+            entry.getValue().getAnimalLocations().forEach(animalLocation -> {
+                checkConflict(entry.getKey(), animalLocation);
                 animalLocationMap.put(animalLocation.getAnimalId(), animalLocation);
-            }
+            });
             if (entry.getKey().equals(id)) {
                 break;
             }
         }
     }
 
-    private void checkTimeFormat(Map.Entry<String, Data> entry) {
-        if (!Validator.timeValidate(entry.getValue().getTime())) {
+    private void checkTimeFormat(String time) {
+        if (!Validator.timeValidate(time)) {
             clear();
             throw new InvalidFomatException(INVALID_FORMAT);
         }
     }
 
-    private void checkConflict(Map.Entry<String, Data> entry, AnimalLocation animalLocation) {
+    private void checkConflict(String id, AnimalLocation animalLocation) {
         if (animalLocationMap.containsKey(animalLocation.getAnimalId())) {
             AnimalLocation preLocation = animalLocationMap.get(animalLocation.getAnimalId());
             int x = preLocation.getxPrevious() + preLocation.getxChange();
             int y = preLocation.getyPrevious() + preLocation.getyChange();
             if (x != animalLocation.getxPrevious() || y != animalLocation.getyPrevious()) {
                 clear();
-                throw new InvalidFomatException(CONFLICT_FOUND + " " + entry.getKey());
+                throw new InvalidFomatException(CONFLICT_FOUND + " " + id);
             }
         }
     }
 
     private void initDataMap(List<Data> datas) {
-        for (int i = 0; i < datas.size() ; i++) {
-            Data data = datas.get(i);
-            dataMap.put(data.getId(), data);
-
-        }
+        datas.forEach(data -> dataMap.put(data.getId(), data));
     }
 
     private String getResult() {
         StringBuilder result = new StringBuilder();
-        for (Map.Entry<String, AnimalLocation> entry : animalLocationMap.entrySet()) {
+        animalLocationMap.entrySet().forEach(entry -> {
             AnimalLocation animalLocation = entry.getValue();
             result.append(entry.getKey()).append(" ")
                     .append(animalLocation.getxPrevious() + animalLocation.getxChange())
                     .append(" ")
                     .append(animalLocation.getyPrevious() + animalLocation.getyChange())
                     .append("\n");
-
-        }
+        });
         clear();
         return result.toString();
     }
