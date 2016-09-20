@@ -20,6 +20,9 @@ This will run checkstyle, unit test and code coverage check
 #### start application
 `./gradlew bootRun` or `java -jar build/libs/tw-homework-0.1.0.jar`
 
+#### swagger-ui links
+`http://localhost:8081/tw-homework/swagger-ui.html`
+
 
 ### 测试运行结果
 #### 正常结果：
