@@ -37,12 +37,12 @@ public class DefaultSnapshotServiceTest {
         Data data0 = new Data();
         data0.setId("e4e87cb2-2222-33ed-44qw-11111999ed11");
         data0.setTime("2016/09/20 08:30:45");
-        data0.setAnimalLocations(asList(generateAnimalLocation("cat1", 3, 4, 0 , 0)));
+        data0.setAnimalLocations(asList(new AnimalLocation("cat1", 3, 4, 0 , 0)));
         Data data1 = new Data();
         data1.setId("e4e87cb2-2222-33ed-44qw-11111999ed13");
         data1.setTime("2016/09/20 08:30:50");
-        data1.setAnimalLocations(asList(generateAnimalLocation("cat1", 3, 4, 4 , -1),
-                generateAnimalLocation("cat2", 5, 9, 0, 0)));
+        data1.setAnimalLocations(asList(new AnimalLocation("cat1", 3, 4, 4 , -1),
+               new AnimalLocation("cat2", 5, 9, 0, 0)));
         datas.add(data0);
         datas.add(data1);
     }
@@ -55,18 +55,29 @@ public class DefaultSnapshotServiceTest {
     }
 
     @Test(expected = InvalidFomatException.class)
-    public void should_throws_right_exception() {
+    public void should_throws_right_exception_given_wrong_id_format() {
         defaultSnapshotService.getSnapshot(datas, "1111");
-
     }
 
-    private AnimalLocation generateAnimalLocation(String animalId, int x, int y, int xChange, int yChange) {
-        AnimalLocation animalLocation = new AnimalLocation();
-        animalLocation.setAnimalId(animalId);
-        animalLocation.setxPrevious(x);
-        animalLocation.setyPrevious(y);
-        animalLocation.setxChange(xChange);
-        animalLocation.setyChange(yChange);
-        return animalLocation;
+    @Test(expected = InvalidFomatException.class)
+    public void should_throws_right_exception_given_wrong_time_format() {
+        Data data2 = new Data();
+        data2.setId("e4e87cb2-2222-33ed-44qw-11111999ed14");
+        data2.setTime("2016/09/2000 08:30:50");
+        data2.setAnimalLocations(asList(new AnimalLocation("cat1", 7, 3, 4 , -1),
+                new AnimalLocation("cat2", 5, 9, 0, 0)));
+        datas.add(data2);
+        defaultSnapshotService.getSnapshot(datas, "e4e87cb2-2222-33ed-44qw-11111999ed14");
     }
+
+    @Test(expected = InvalidFomatException.class)
+    public void should_throws_right_exception_given_conflict_data() {
+        Data data3 = new Data();
+        data3.setId("e4e87cb2-2222-33ed-44qw-11111999ed15");
+        data3.setTime("2016/09/2000 08:30:50");
+        data3.setAnimalLocations(asList(new AnimalLocation("cat1", 10, 2, 2 , 1)));
+        datas.add(data3);
+        defaultSnapshotService.getSnapshot(datas, "e4e87cb2-2222-33ed-44qw-11111999ed15");
+    }
+
 }

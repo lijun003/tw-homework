@@ -8,6 +8,17 @@ public class AnimalLocation {
     private int xChange;
     private int yChange;
 
+    public AnimalLocation() {
+    }
+
+    public AnimalLocation(String animalId, int xPrevious, int yPrevious, int xChange, int yChange) {
+        this.animalId = animalId;
+        this.xPrevious = xPrevious;
+        this.yPrevious = yPrevious;
+        this.xChange = xChange;
+        this.yChange = yChange;
+    }
+
     public String getAnimalId() {
         return animalId;
     }

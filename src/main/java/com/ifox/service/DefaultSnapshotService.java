@@ -14,6 +14,8 @@ import com.ifox.util.Validator;
 @Service
 public class DefaultSnapshotService implements SnapshotService {
 
+    private static final String INVALID_FORMAT = "Invalid Format";
+    private static final String CONFLICT_FOUND = "Conflict found at";
     private Map<String, Data> dataMap = new LinkedHashMap<>();
 
     private Map<String, AnimalLocation> animalLocationMap = new TreeMap<>();
@@ -21,25 +23,49 @@ public class DefaultSnapshotService implements SnapshotService {
 
     @Override
     public String getSnapshot(List<Data> datas, String id) {
-        if (!Validator.idValidate(id)) {
-            throw  new InvalidFomatException("Invalid Format");
-
-        }
+        checkIdFormat(id);
         initDataMap(datas);
         initAnimalMap(id);
         return getResult();
     }
 
+    private void checkIdFormat(String id) {
+        if (!Validator.idValidate(id)) {
+            clear();
+            throw  new InvalidFomatException("Invalid Format");
+
+        }
+    }
+
     private void initAnimalMap(String id) {
         for (Map.Entry<String, Data> entry : dataMap.entrySet()) {
-            if (!Validator.timeValidate(entry.getValue().getTime())) {
-                throw new InvalidFomatException("Invalid Format");
-            }
+            checkTimeFormat(entry);
+            checkIdFormat(entry.getKey());
             for (AnimalLocation animalLocation : entry.getValue().getAnimalLocations()) {
-               animalLocationMap.put(animalLocation.getAnimalId(), animalLocation);
+                checkConflict(entry, animalLocation);
+                animalLocationMap.put(animalLocation.getAnimalId(), animalLocation);
             }
             if (entry.getKey().equals(id)) {
                 break;
+            }
+        }
+    }
+
+    private void checkTimeFormat(Map.Entry<String, Data> entry) {
+        if (!Validator.timeValidate(entry.getValue().getTime())) {
+            clear();
+            throw new InvalidFomatException(INVALID_FORMAT);
+        }
+    }
+
+    private void checkConflict(Map.Entry<String, Data> entry, AnimalLocation animalLocation) {
+        if (animalLocationMap.containsKey(animalLocation.getAnimalId())) {
+            AnimalLocation preLocation = animalLocationMap.get(animalLocation.getAnimalId());
+            int x = preLocation.getxPrevious() + preLocation.getxChange();
+            int y = preLocation.getyPrevious() + preLocation.getyChange();
+            if (x != animalLocation.getxPrevious() || y != animalLocation.getyPrevious()) {
+                clear();
+                throw new InvalidFomatException(CONFLICT_FOUND + " " + entry.getKey());
             }
         }
     }
@@ -63,8 +89,12 @@ public class DefaultSnapshotService implements SnapshotService {
                     .append("\n");
 
         }
+        clear();
+        return result.toString();
+    }
+
+    private void clear() {
         dataMap.clear();
         animalLocationMap.clear();
-        return result.toString();
     }
 }

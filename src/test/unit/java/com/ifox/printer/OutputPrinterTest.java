@@ -9,7 +9,7 @@ public class OutputPrinterTest {
 
 
     @Test
-    public void should_printe_right_content() throws Exception {
+    public void should_printer_right_content() throws Exception {
         IPrinter consolePrinter = mock(ConsolePrinter.class);
 
         OutputPrinter.getInstance().print("expected", consolePrinter);
