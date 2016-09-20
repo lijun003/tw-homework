@@ -1,5 +1,7 @@
-[![travis-ci](https://travis-ci.org/lijun003/tw-homework.svg)](https://travis-ci.org/lijun003/tw-homework)
-[![JDK](http://img.shields.io/badge/JDK-v8.0-yellow.svg)](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+# tw-homework project
+
+# [![travis-ci](https://travis-ci.org/lijun003/tw-homework.svg)](https://travis-ci.org/lijun003/tw-homework)
+# [![JDK](http://img.shields.io/badge/JDK-v8.0-yellow.svg)](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 
 ### BUILD
 
