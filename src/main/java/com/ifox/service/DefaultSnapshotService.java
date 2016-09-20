@@ -5,17 +5,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ifox.domain.AnimalLocation;
 import com.ifox.domain.Data;
-import com.ifox.parser.IParser;
+import com.ifox.exception.InvalidFomatException;
+import com.ifox.util.Validator;
 
 @Service
 public class DefaultSnapshotService implements SnapshotService {
-
-    @Autowired
-    private IParser dataParser;
 
     private Map<String, Data> dataMap = new LinkedHashMap<>();
 
@@ -23,14 +20,21 @@ public class DefaultSnapshotService implements SnapshotService {
 
 
     @Override
-    public String getSnapshot(String historyData, String id) {
-        initDataMap(dataParser.parseData(historyData));
+    public String getSnapshot(List<Data> datas, String id) {
+        if (!Validator.idValidate(id)) {
+            throw  new InvalidFomatException("Invalid Format");
+
+        }
+        initDataMap(datas);
         initAnimalMap(id);
         return getResult();
     }
 
     private void initAnimalMap(String id) {
         for (Map.Entry<String, Data> entry : dataMap.entrySet()) {
+            if (!Validator.timeValidate(entry.getValue().getTime())) {
+                throw new InvalidFomatException("Invalid Format");
+            }
             for (AnimalLocation animalLocation : entry.getValue().getAnimalLocations()) {
                animalLocationMap.put(animalLocation.getAnmimalId(), animalLocation);
             }
@@ -53,9 +57,9 @@ public class DefaultSnapshotService implements SnapshotService {
         for (Map.Entry<String, AnimalLocation> entry : animalLocationMap.entrySet()) {
             AnimalLocation animalLocation = entry.getValue();
             result.append(entry.getKey()).append(" ")
-                    .append(animalLocation.getxPrevious() + animalLocation.getxChange())
+                    .append(animalLocation.getXPrevious() + animalLocation.getXChange())
                     .append(" ")
-                    .append(animalLocation.getyPrevious() + animalLocation.getyChange())
+                    .append(animalLocation.getYPrevious() + animalLocation.getYChange())
                     .append("\n");
 
         }

@@ -20,6 +20,7 @@ public enum ErrorCode {
 
 
     // 5000 ~ 6000,
+    INVALID_FORMAT(5000),
 
 
     // unknown error

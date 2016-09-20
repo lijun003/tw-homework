@@ -15,35 +15,35 @@ public class AnimalLocation {
         this.anmimalId = anmimalId;
     }
 
-    public int getxPrevious() {
+    public int getXPrevious() {
         return xPrevious;
     }
 
-    public void setxPrevious(int xPrevious) {
+    public void setXPrevious(int xPrevious) {
         this.xPrevious = xPrevious;
     }
 
-    public int getyPrevious() {
+    public int getYPrevious() {
         return yPrevious;
     }
 
-    public void setyPrevious(int yPrevious) {
+    public void setYPrevious(int yPrevious) {
         this.yPrevious = yPrevious;
     }
 
-    public int getxChange() {
+    public int getXChange() {
         return xChange;
     }
 
-    public void setxChange(int xChange) {
+    public void setXChange(int xChange) {
         this.xChange = xChange;
     }
 
-    public int getyChange() {
+    public int getYChange() {
         return yChange;
     }
 
-    public void setyChange(int yChange) {
+    public void setYChange(int yChange) {
         this.yChange = yChange;
     }
 }

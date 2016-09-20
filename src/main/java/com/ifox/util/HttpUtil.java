@@ -19,6 +19,7 @@ public class HttpUtil {
             .writeTimeout(10, SECONDS)
             .readTimeout(30, SECONDS)
             .build();
+
     public static OkHttpClient getOkHttpClient() {
         return okHttpClient == null ? new OkHttpClient() : okHttpClient;
     }
@@ -44,11 +45,8 @@ public class HttpUtil {
         RequestBody body = RequestBody.create(JSON, json);
         Request request = getRequest(url, body);
         Response response = getOkHttpClient().newCall(request).execute();
-        if (response.isSuccessful()) {
-            return response;
-        } else {
-            throw new IOException("Unexpected code " + response);
-        }
+        return response;
+
     }
 
     public static void post(String url, String json, Callback callback) throws IOException {
