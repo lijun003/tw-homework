@@ -2,7 +2,7 @@
 
 ### travis-ci
 
-[![travis-ci](https://api.travis-ci.org/lijun003/tw-homework)](https://travis-ci.org/lijun003/tw-homework)
+[![travis-ci](https://travis-ci.org/lijun003/tw-homework.svg)](https://travis-ci.org/lijun003/tw-homework)
 
 ### BUILD
 
