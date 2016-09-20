@@ -39,11 +39,11 @@ public class DataParser implements IParser {
     }
 
     private void setAnimalLocation(AnimalLocation animalLocation, String[] animalInfo) {
-        animalLocation.setAnmimalId(animalInfo[0]);
-        animalLocation.setXPrevious(parseInt(animalInfo[1]));
-        animalLocation.setYPrevious(parseInt(animalInfo[2]));
-        animalLocation.setXChange(animalInfo.length == 5 ? parseInt(animalInfo[3]) : 0);
-        animalLocation.setYChange(animalInfo.length == 5 ? parseInt(animalInfo[4]) : 0);
+        animalLocation.setAnimalId(animalInfo[0]);
+        animalLocation.setxPrevious(parseInt(animalInfo[1]));
+        animalLocation.setyPrevious(parseInt(animalInfo[2]));
+        animalLocation.setxChange(animalInfo.length == 5 ? parseInt(animalInfo[3]) : 0);
+        animalLocation.setyChange(animalInfo.length == 5 ? parseInt(animalInfo[4]) : 0);
     }
 
     private String[] parseString(String history, String splitter) {

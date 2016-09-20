@@ -10,6 +10,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import com.alibaba.fastjson.JSON;
 import com.ifox.domain.RequestBody;
 import com.ifox.parser.IParser;
+import com.ifox.printer.ConsolePrinter;
+import com.ifox.printer.OutputPrinter;
 import com.ifox.util.HttpUtil;
 
 import okhttp3.Response;
@@ -36,6 +38,6 @@ public class Application {
         requestBody.setId("e4e87cb2-2222-33ed-44qw-11111999ed13");
         requestBody.setDatas(dataParser.parseData(historyData));
         Response response = HttpUtil.post(URL, JSON.toJSONString(requestBody));
-        System.out.println(response.body().string());
+        OutputPrinter.getInstance().print(response.body().string(), new ConsolePrinter());
     }
 }

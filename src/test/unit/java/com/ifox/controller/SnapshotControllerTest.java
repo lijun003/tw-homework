@@ -61,11 +61,11 @@ public class SnapshotControllerTest {
 
     private AnimalLocation generateAnimalLocation(String animalId, int x, int y, int xChange, int yChange) {
         AnimalLocation animalLocation = new AnimalLocation();
-        animalLocation.setAnmimalId(animalId);
-        animalLocation.setXPrevious(x);
-        animalLocation.setYPrevious(y);
-        animalLocation.setXChange(xChange);
-        animalLocation.setYChange(yChange);
+        animalLocation.setAnimalId(animalId);
+        animalLocation.setxPrevious(x);
+        animalLocation.setyPrevious(y);
+        animalLocation.setxChange(xChange);
+        animalLocation.setyChange(yChange);
         return animalLocation;
     }
 }

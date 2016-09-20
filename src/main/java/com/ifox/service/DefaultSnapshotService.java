@@ -36,7 +36,7 @@ public class DefaultSnapshotService implements SnapshotService {
                 throw new InvalidFomatException("Invalid Format");
             }
             for (AnimalLocation animalLocation : entry.getValue().getAnimalLocations()) {
-               animalLocationMap.put(animalLocation.getAnmimalId(), animalLocation);
+               animalLocationMap.put(animalLocation.getAnimalId(), animalLocation);
             }
             if (entry.getKey().equals(id)) {
                 break;
@@ -57,12 +57,14 @@ public class DefaultSnapshotService implements SnapshotService {
         for (Map.Entry<String, AnimalLocation> entry : animalLocationMap.entrySet()) {
             AnimalLocation animalLocation = entry.getValue();
             result.append(entry.getKey()).append(" ")
-                    .append(animalLocation.getXPrevious() + animalLocation.getXChange())
+                    .append(animalLocation.getxPrevious() + animalLocation.getxChange())
                     .append(" ")
-                    .append(animalLocation.getYPrevious() + animalLocation.getYChange())
+                    .append(animalLocation.getyPrevious() + animalLocation.getyChange())
                     .append("\n");
 
         }
+        dataMap.clear();
+        animalLocationMap.clear();
         return result.toString();
     }
 }

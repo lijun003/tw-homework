@@ -1,49 +1,53 @@
 package com.ifox.domain;
 
 public class AnimalLocation {
-    private String anmimalId;
+
+    private String animalId;
     private int xPrevious;
     private int yPrevious;
     private int xChange;
     private int yChange;
 
-    public String getAnmimalId() {
-        return anmimalId;
+    public String getAnimalId() {
+        return animalId;
     }
 
-    public void setAnmimalId(String anmimalId) {
-        this.anmimalId = anmimalId;
+    public void setAnimalId(String animalId) {
+        this.animalId = animalId;
     }
 
-    public int getXPrevious() {
+    public int getxPrevious() {
         return xPrevious;
     }
 
-    public void setXPrevious(int xPrevious) {
+    public void setxPrevious(int xPrevious) {
         this.xPrevious = xPrevious;
     }
 
-    public int getYPrevious() {
+    public int getyPrevious() {
         return yPrevious;
     }
 
-    public void setYPrevious(int yPrevious) {
+    public void setyPrevious(int yPrevious) {
         this.yPrevious = yPrevious;
     }
 
-    public int getXChange() {
+    public int getxChange() {
         return xChange;
     }
 
-    public void setXChange(int xChange) {
+    public void setxChange(int xChange) {
         this.xChange = xChange;
     }
 
-    public int getYChange() {
+    public int getyChange() {
         return yChange;
     }
 
-    public void setYChange(int yChange) {
+    public void setyChange(int yChange) {
         this.yChange = yChange;
     }
+
+
+
 }

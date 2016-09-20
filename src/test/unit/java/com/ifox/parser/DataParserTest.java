@@ -29,9 +29,9 @@ public class DataParserTest {
         assertThat(dataParser.parseData(historyData).get(0).getAnimalLocations().size(), is(1));
         assertThat(dataParser.parseData(historyData).get(1).getId(), is("e4e87cb3"));
         assertThat(dataParser.parseData(historyData).get(1).getAnimalLocations().size(), is(2));
-        assertThat(dataParser.parseData(historyData).get(1).getAnimalLocations().get(1).getAnmimalId(),
+        assertThat(dataParser.parseData(historyData).get(1).getAnimalLocations().get(1).getAnimalId(),
                 is("cat2"));
-        assertThat(dataParser.parseData(historyData).get(1).getAnimalLocations().get(0).getYChange(),
+        assertThat(dataParser.parseData(historyData).get(1).getAnimalLocations().get(0).getyChange(),
                 is(-1));
 
     }
