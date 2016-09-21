@@ -24,13 +24,13 @@ public class Application {
     private static IParser dataParser;
 
     public static void main(String[] args) throws IOException {
-       String historyData = "e4e87cb2-2222-33ed-44qw-11111999ed11"
-               + "\n" + "2016/09/20 08:30:45" + "\n" + "cat1 10 9" + "\n\n" +
-               "e4e87cb2-2222-33ed-44qw-11111999ed12"
-               + "\n" + "2016/09/20 08:30:50" + "\n" + "cat1 10 9 2 -1" + "\n" +
-               "cat2 2 3" + "\n\n"
-               + "e4e87cb2-2222-33ed-44qw-11111999ed13" + "\n"
-               + "2016/09/20 08:31:05" + "\n" + "cat1 12 8 3 4";
+        String historyData = "e4e87cb2-2222-33ed-44qw-11111999ed11"
+                + "\n" + "2016/09/20 08:30:45" + "\n" + "cat1 10 9" + "\n\n" +
+                "e4e87cb2-2222-33ed-44qw-11111999ed12"
+                + "\n" + "2016/09/20 08:30:50" + "\n" + "cat1 10 9 2 -1" + "\n" +
+                "cat2 2 3" + "\n\n"
+                + "e4e87cb2-2222-33ed-44qw-11111999ed13" + "\n"
+                + "2016/09/20 08:31:05" + "\n" + "cat1 12 8 3 4";
         ApplicationContext context = new AnnotationConfigApplicationContext("com.ifox.parser");
         dataParser = context.getBean(IParser.class);
         SpringApplication.run(Application.class, args);
